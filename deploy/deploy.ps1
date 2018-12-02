@@ -36,10 +36,10 @@ $connection =  Get-CrmConnection -ConnectionString $connectionString
 #$directorypath = Split-Path $invocation.MyCommand.Path
 #. $($directorypath + '\RegisterXrmTooling')
 
-Write-Host 'Update 3'
+Write-Host 'Update 4'
 $filePath = $directorypath + '\Sample_unmanaged.zip'
 
-Write-Host $filePath
+Write-Host $directorypath
 
 #Export-CrmSolution "Sample" -conn $connection
 Import-CrmSolution -SolutionFilePath 'C:\Projects\agent\_work\r1\a\_ramimounla_wip\deploy\Sample_unmanaged.zip' -conn $connection #-PublishChanges  
