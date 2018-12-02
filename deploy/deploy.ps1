@@ -13,6 +13,7 @@ $organisation = "org9e4a5619"
 #Set-ExecutionPolicy –ExecutionPolicy RemoteSigned –Scope CurrentUser
 #Install-Module Microsoft.Xrm.Data.PowerShell -Scope CurrentUser
 Import-Module Microsoft.Xrm.Data.Powershell
+Import-Module Microsoft.Xrm.Tooling.CrmConnector.PowerShell
 
 #$connection = Get-CrmConnection -InteractiveMode
 
@@ -21,9 +22,12 @@ $connectionString = "AuthType=Office365;Username=ramim@d365nz4.onmicrosoft.com;P
 $connection =  Get-CrmConnection -ConnectionString $connectionString
 # -Credential $credentials -ServerUrl $instance -OrganizationName $organisation
 
-$invocation = (Get-Variable MyInvocation).Value
-$directorypath = Split-Path $invocation.MyCommand.Path
-. $($directorypath + '\RegisterXrmTooling')
+#$invocation = (Get-Variable MyInvocation).Value
+#$directorypath = Split-Path $invocation.MyCommand.Path
+#. $($directorypath + '\RegisterXrmTooling')
+
+Write-Host 'Update 1'
+
 
 #Export-CrmSolution "Sample" -conn $connection
 Import-CrmSolution -SolutionFilePath $($directorypath + '\Sample_unmanaged.zip') -conn $connection #-PublishChanges  
