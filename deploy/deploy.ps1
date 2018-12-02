@@ -42,5 +42,5 @@ $filePath = $directorypath + '\Sample_unmanaged.zip'
 Write-Host $filePath
 
 #Export-CrmSolution "Sample" -conn $connection
-Import-CrmSolution -SolutionFilePath '.\Sample_unmanaged.zip' -conn $connection #-PublishChanges  
+Import-CrmSolution -SolutionFilePath 'C:\Projects\agent\_work\r1\a\_ramimounla_wip\deploy\Sample_unmanaged.zip' -conn $connection #-PublishChanges  
 
