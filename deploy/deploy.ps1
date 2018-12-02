@@ -23,6 +23,8 @@ $connection =  Get-CrmConnection -ConnectionString $connectionString
 
 $invocation = (Get-Variable MyInvocation).Value
 $directorypath = Split-Path $invocation.MyCommand.Path
+. $($directorypath + '\RegisterXrmTooling')
+
 #Export-CrmSolution "Sample" -conn $connection
 Import-CrmSolution -SolutionFilePath $($directorypath + '\Sample_unmanaged.zip') -conn $connection #-PublishChanges  
 
