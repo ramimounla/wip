@@ -26,7 +26,7 @@ $connection =  Get-CrmConnection -ConnectionString $connectionString
 #$directorypath = Split-Path $invocation.MyCommand.Path
 #. $($directorypath + '\RegisterXrmTooling')
 
-Write-Host 'Update 1'
+Write-Host 'Update 2'
 
 
 #Export-CrmSolution "Sample" -conn $connection
