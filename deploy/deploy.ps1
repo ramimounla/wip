@@ -1,6 +1,16 @@
 ﻿Write-Host 'Hello world'
 
 
+#Run Setup Security Protocal for TLS 1.2 - Required for CDS\XRM 9.x + 
+[System.Net.ServicePointManager]::SecurityProtocol = [System.Net.SecurityProtocolType]::Tls12
+
+# Load the module.
+$env:PSModulePath = (Resolve-Path .).Path + ";" + $env:PSModulePath
+Import-Module 'Microsoft.Xrm.Tooling.CrmConnector.PowerShell' -Verbose
+
+
+Write-Host 'Update 1'
+
 $user = "ramim@d365nz4.onmicrosoft.com"
 $password = "Focus123"
 $cred = New-Object System.Management.Automation.PSCredential ($user, (ConvertTo-SecureString $password –ASPlainText –Force))
