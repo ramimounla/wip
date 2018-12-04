@@ -1,6 +1,6 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Microsoft.Dynamics365.UIAutomation.Api.UCI;
 using Microsoft.Dynamics365.UIAutomation.Api;
 using Microsoft.Dynamics365.UIAutomation.Browser;
 using System;
@@ -11,15 +11,36 @@ namespace EasyRepro
     [TestClass]
     public class UnitTest1
     {
-        private readonly SecureString _username  = System.Configuration.ConfigurationManager.AppSettings["OnlineUsername"].ToSecureString();
+        private readonly SecureString _username = System.Configuration.ConfigurationManager.AppSettings["OnlineUsername"].ToSecureString();
         private readonly SecureString _password = System.Configuration.ConfigurationManager.AppSettings["OnlinePassword"].ToSecureString();
-        private readonly Uri _xrmUri = new Uri(System.Configuration.ConfigurationManager.AppSettings["OnlineCrmUrl"].ToString());
+        private Uri _xrmUri = new Uri(System.Configuration.ConfigurationManager.AppSettings["OnlineCrmUrl"].ToString());
 
         [TestMethod]
-        public void TestMethod1()
+        public void TestCreateAccountUCI()
         {
-            Assert.IsTrue(true);
+            var client = new WebClient(TestSettings.Options);
+            using (var xrmApp = new XrmApp(client))
+            {
+                xrmApp.OnlineLogin.Login(_xrmUri, _username, _password);
 
+                xrmApp.Navigation.OpenApp("Sales Hub");
+
+                xrmApp.Navigation.OpenSubArea("Sales", "Accounts");
+
+                xrmApp.CommandBar.ClickCommand("New");
+
+                xrmApp.Entity.SetValue("name", "Test Account Creation");
+
+                xrmApp.Entity.Save();
+
+            }
+
+
+        }
+        [TestMethod]
+        [Ignore]
+        public void TestCreateAccountWeb()
+        {
             using (var xrmBrowser = new Browser(TestSettings.Options))
             {
                 xrmBrowser.LoginPage.Login(_xrmUri, _username, _password);
@@ -27,6 +48,7 @@ namespace EasyRepro
 
                 xrmBrowser.ThinkTime(500);
                 xrmBrowser.Navigation.OpenSubArea("Sales", "Accounts");
+
 
                 xrmBrowser.ThinkTime(2000);
                 xrmBrowser.Grid.SwitchView("Active Accounts");
